@@ -4,8 +4,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS } from "../../styles/constants";
 import { Text } from "react-native";
 import { globalStyles } from "../../styles/global";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export default function MainTabs() {
+  const { user } = useContext(UserContext);
+
   return (
     <Tabs
       screenOptions={{
@@ -15,7 +19,9 @@ export default function MainTabs() {
           backgroundColor: COLORS.dark,
         },
         headerRight: () => {
-          return (
+          return user ? (
+            <Text style={globalStyles.text}>{user.name}</Text>
+          ) : (
             <Link href="login">
               <Text style={globalStyles.text}>Login</Text>
             </Link>
@@ -33,21 +39,40 @@ export default function MainTabs() {
           },
         }}
       />
-      <Tabs.Screen
-        name="page2"
-        options={{
-          title: "Page 2",
-          tabBarIcon: ({ color }) => {
-            return (
-              <MaterialCommunityIcons
-                name="animation-outline"
-                size={24}
-                color={color}
-              />
-            );
-          },
-        }}
-      />
+      {user ? (
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            tabBarIcon: ({ color }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="animation-outline"
+                  size={24}
+                  color={color}
+                />
+              );
+            },
+          }}
+        />
+      ) : (
+        <Tabs.Screen
+          name="profile"
+          options={{
+            tabBarIconStyle: { display: "none" },
+            title: "Profile",
+            tabBarIcon: ({ color }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="animation-outline"
+                  size={24}
+                  color={color}
+                />
+              );
+            },
+          }}
+        />
+      )}
     </Tabs>
   );
 }

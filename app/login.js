@@ -1,30 +1,20 @@
 import { globalStyles } from "../styles/global";
 import { COLORS } from "../styles/constants";
 import { Text, TextInput, View, Button, Pressable } from "react-native";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { router } from "expo-router";
-import axios from "axios";
-
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+import { UserContext } from "../context/UserContext";
 
 export default function Login() {
   const [name, setName] = useState("");
+  const { user, login } = useContext(UserContext);
   const showBackButton = router.canGoBack();
 
-  async function handleSubmit() {
-    try {
-      const { data } = await axios.post(`${apiUrl}/users/login`, {
-        username: name,
-      });
+  useEffect(() => {
+    if (user) {
       router.back();
-      console.log(data);
-    } catch (error) {
-      if (error.response?.status === 404) {
-        alert("User not found");
-      } else alert("Server Error 😵");
-      console.log(error);
     }
-  }
+  }, [user]);
 
   return (
     <View
@@ -62,7 +52,7 @@ export default function Login() {
         />
         <Pressable
           onPress={() => {
-            handleSubmit();
+            login(name);
           }}
           title="Submit"
           style={globalStyles.submitPressable}
