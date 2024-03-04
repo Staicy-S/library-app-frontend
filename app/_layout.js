@@ -8,7 +8,7 @@ export default function RootStack() {
       }}
     >
       <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="login" />
+      <Stack.Screen name="login" options={{ presentation: "modal" }} />
     </Stack>
   );
 }

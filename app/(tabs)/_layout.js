@@ -1,7 +1,9 @@
-import { Tabs } from "expo-router";
+import { Link, Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS } from "../../styles/constants";
+import { Text } from "react-native";
+import { globalStyles } from "../../styles/global";
 
 export default function MainTabs() {
   return (
@@ -11,6 +13,13 @@ export default function MainTabs() {
         headerTintColor: COLORS.light,
         tabBarStyle: {
           backgroundColor: COLORS.dark,
+        },
+        headerRight: () => {
+          return (
+            <Link href="login">
+              <Text style={globalStyles.text}>Login</Text>
+            </Link>
+          );
         },
         tabBarActiveTintColor: COLORS.primary,
       }}
