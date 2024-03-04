@@ -17,4 +17,29 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "700",
   },
+  spacing: {
+    gap: 10,
+  },
+  textInput: {
+    marginTop: 10,
+    backgroundColor: "white",
+    height: 50,
+    fontSize: 28,
+    paddingLeft: 10,
+    borderRadius: 10,
+  },
+  submitPressable: {
+    height: 50,
+    fontSize: 30,
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+  },
+  submitPressableText: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 33,
+    letterSpacing: 1.1,
+    fontWeight: 500,
+  },
 });

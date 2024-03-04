@@ -2,10 +2,8 @@ import { Text, View, FlatList, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from "expo-router";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-console.log(apiUrl);
 
 export default function Home() {
   const [books, setBooks] = useState([]);
@@ -15,7 +13,7 @@ export default function Home() {
       try {
         const { data } = await axios.get(`${apiUrl}/books`);
         setBooks(data);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         // console.log(error);
       } finally {
@@ -40,9 +38,6 @@ export default function Home() {
           );
         }}
       />
-      <Link href="login">
-        <Text style={globalStyles.text}>Login</Text>
-      </Link>
     </View>
   );
 }
