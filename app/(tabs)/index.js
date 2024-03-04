@@ -30,7 +30,6 @@ export default function Home() {
         data={books}
         keyExtractor={(book) => book.id}
         renderItem={({ item }) => {
-          console.log(item);
           return (
             <View>
               <Text style={globalStyles.text}>{item.title}</Text>

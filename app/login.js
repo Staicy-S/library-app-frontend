@@ -3,10 +3,29 @@ import { COLORS } from "../styles/constants";
 import { Text, TextInput, View, Button, Pressable } from "react-native";
 import { useState } from "react";
 import { router } from "expo-router";
+import axios from "axios";
+
+const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function Login() {
   const [name, setName] = useState("");
   const showBackButton = router.canGoBack();
+
+  async function handleSubmit() {
+    try {
+      const { data } = await axios.post(`${apiUrl}/users/login`, {
+        username: name,
+      });
+      router.back();
+      console.log(data);
+    } catch (error) {
+      if (error.response?.status === 404) {
+        alert("User not found");
+      } else alert("Server Error 😵");
+      console.log(error);
+    }
+  }
+
   return (
     <View
       style={[
@@ -43,8 +62,7 @@ export default function Login() {
         />
         <Pressable
           onPress={() => {
-            router.back();
-            console.log(name);
+            handleSubmit();
           }}
           title="Submit"
           style={globalStyles.submitPressable}
