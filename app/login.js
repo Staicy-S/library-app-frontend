@@ -1,20 +1,24 @@
 import { globalStyles } from "../styles/global";
 import { COLORS } from "../styles/constants";
-import { Text, TextInput, View, Button, Pressable } from "react-native";
-import { useState, useContext, useEffect } from "react";
-import { router } from "expo-router";
+import { Text, TextInput, View, Pressable } from "react-native";
+import { useState, useContext } from "react";
+import { useRouter } from "expo-router";
 import { UserContext } from "../context/UserContext";
+import { Redirect } from "expo-router";
 
 export default function Login() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const { user, login } = useContext(UserContext);
   const showBackButton = router.canGoBack();
 
-  useEffect(() => {
-    if (user) {
-      router.back();
-    }
-  }, [user]);
+  async function handleSubmit() {
+    login(name);
+  }
+
+  if (user) {
+    return <Redirect href="/" />;
+  }
 
   return (
     <View
@@ -51,9 +55,7 @@ export default function Login() {
           style={globalStyles.textInput}
         />
         <Pressable
-          onPress={() => {
-            login(name);
-          }}
+          onPress={handleSubmit}
           title="Submit"
           style={globalStyles.submitPressable}
         >

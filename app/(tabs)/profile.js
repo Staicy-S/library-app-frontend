@@ -1,21 +1,25 @@
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { UserContext } from "../../context/UserContext";
 import { useContext, useEffect } from "react";
 import { globalStyles } from "../../styles/global";
-import { COLORS } from "../../styles/constants";
-import { router } from "expo-router";
+import { Redirect } from "expo-router";
 
 export default function Profile() {
-  const { user, login } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
 
-  useEffect(() => {
-    router.push("/");
-  }, [user]);
+  if (!user) {
+    return <Redirect href="/" />;
+  }
 
   return (
-    <View style={globalStyles.container}>
+    <View style={[globalStyles.container, globalStyles.spacing]}>
       <Text style={globalStyles.heading}>Profile</Text>
       <Text style={globalStyles.text}>Welcome {user?.name}</Text>
+      <Pressable onPress={logout} style={globalStyles.submitPressable}>
+        <Text style={[globalStyles.text, globalStyles.submitPressableText]}>
+          Logout
+        </Text>
+      </Pressable>
     </View>
   );
 }

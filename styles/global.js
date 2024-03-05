@@ -1,19 +1,22 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "./constants";
+import { COLORS, FONTS } from "./constants";
 
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.dark,
+    backgroundColor: COLORS.backgroundDark,
     padding: 12,
+    paddingVertical: 20,
   },
   text: {
+    fontFamily: FONTS.regular,
     fontSize: 16,
-    color: COLORS.light,
+    color: COLORS.text,
   },
   heading: {
+    fontFamily: FONTS.bold,
     fontSize: 32,
-    color: COLORS.primary,
+    color: COLORS.text,
     textAlign: "center",
     fontWeight: "700",
   },
@@ -21,6 +24,7 @@ export const globalStyles = StyleSheet.create({
     gap: 10,
   },
   textInput: {
+    fontFamily: FONTS.regular,
     marginTop: 10,
     backgroundColor: "white",
     height: 50,

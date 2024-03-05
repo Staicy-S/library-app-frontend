@@ -2,7 +2,7 @@ import { Link, Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS } from "../../styles/constants";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { globalStyles } from "../../styles/global";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
@@ -13,29 +13,40 @@ export default function MainTabs() {
   return (
     <Tabs
       screenOptions={{
-        headerStyle: { backgroundColor: COLORS.dark },
-        headerTintColor: COLORS.light,
+        headerShadowVisible: false,
+        headerStyle: { backgroundColor: COLORS.backgroundDark },
+        headerTitleStyle: [globalStyles.heading],
+        headerTintColor: COLORS.text,
         tabBarStyle: {
-          backgroundColor: COLORS.dark,
+          borderTopColor: COLORS.grey,
+          backgroundColor: COLORS.backgroundDark,
         },
         headerRight: () => {
-          return user ? (
-            <Text style={globalStyles.text}>{user.name}</Text>
-          ) : (
-            <Link href="login">
-              <Text style={globalStyles.text}>Login</Text>
-            </Link>
+          return user ? null : (
+            <View style={{ paddingRight: 12 }}>
+              <Link href="login">
+                <Text style={globalStyles.text}>Login</Text>
+              </Link>
+            </View>
           );
         },
-        tabBarActiveTintColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.grey,
+        tabBarActiveTintColor: COLORS.text,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Library",
+          tabBarLabel: "Library",
           tabBarIcon: ({ color }) => {
-            return <MaterialIcons name="animation" size={24} color={color} />;
+            return (
+              <MaterialCommunityIcons
+                name="bookshelf"
+                size={24}
+                color={color}
+              />
+            );
           },
         }}
       />
@@ -46,11 +57,7 @@ export default function MainTabs() {
             title: "Profile",
             tabBarIcon: ({ color }) => {
               return (
-                <MaterialCommunityIcons
-                  name="animation-outline"
-                  size={24}
-                  color={color}
-                />
+                <MaterialIcons name="person-outline" size={24} color={color} />
               );
             },
           }}
@@ -59,7 +66,7 @@ export default function MainTabs() {
         <Tabs.Screen
           name="profile"
           options={{
-            tabBarIconStyle: { display: "none" },
+            href: user ? "profile" : null,
             title: "Profile",
             tabBarIcon: ({ color }) => {
               return (

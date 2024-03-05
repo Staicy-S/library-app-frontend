@@ -2,6 +2,7 @@ import { Text, View, FlatList, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { BookListItem } from "../../components/BookListItem";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
@@ -25,18 +26,16 @@ export default function Home() {
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.heading}>📚 Library App</Text>
-      <FlatList
-        data={books}
-        keyExtractor={(book) => book.id}
-        renderItem={({ item }) => {
-          return (
-            <View>
-              <Text style={globalStyles.text}>{item.title}</Text>
-            </View>
-          );
-        }}
-      />
+      <View>
+        <FlatList
+          contentContainerStyle={{ gap: 12 }}
+          data={books}
+          keyExtractor={(book) => book.id}
+          renderItem={({ item }) => {
+            return <BookListItem book={item} />;
+          }}
+        />
+      </View>
     </View>
   );
 }
