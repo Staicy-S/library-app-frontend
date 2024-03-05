@@ -1,19 +1,22 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "./constants";
+import { COLORS, FONTS } from "./constants";
 
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.dark,
+    backgroundColor: COLORS.backgroundDark,
     padding: 12,
+    paddingVertical: 20,
   },
   text: {
+    fontFamily: FONTS.regular,
     fontSize: 16,
-    color: COLORS.light,
+    color: COLORS.text,
   },
   heading: {
-    fontSize: 32,
-    color: COLORS.primary,
+    fontFamily: FONTS.bold,
+    fontSize: 28,
+    color: COLORS.text,
     textAlign: "center",
     fontWeight: "700",
   },
@@ -21,24 +24,26 @@ export const globalStyles = StyleSheet.create({
     gap: 10,
   },
   textInput: {
-    marginTop: 10,
-    backgroundColor: "white",
-    height: 50,
-    fontSize: 28,
-    paddingLeft: 10,
+    color: COLORS.backgroundDark,
+    fontFamily: FONTS.regular,
+    backgroundColor: COLORS.text,
+    fontSize: 18,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
     borderRadius: 10,
+    textAlign: "center",
   },
   submitPressable: {
-    height: 50,
-    fontSize: 30,
     backgroundColor: COLORS.primary,
     borderRadius: 10,
     justifyContent: "center",
   },
   submitPressableText: {
     textAlign: "center",
-    fontSize: 30,
+    fontFamily: FONTS.bold,
+    padding: 8,
+    fontSize: 18,
     letterSpacing: 1.1,
-    fontWeight: 500,
+    textTransform: "uppercase",
   },
 });

@@ -2,45 +2,49 @@ import { Link, Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS } from "../../styles/constants";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { globalStyles } from "../../styles/global";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export default function MainTabs() {
+  const { user } = useContext(UserContext);
+
   return (
     <Tabs
       screenOptions={{
-        headerStyle: { backgroundColor: COLORS.dark },
-        headerTintColor: COLORS.light,
+        headerShadowVisible: false,
+        headerStyle: { backgroundColor: COLORS.background },
+        headerTitleStyle: [globalStyles.heading],
+        headerTintColor: COLORS.text,
         tabBarStyle: {
-          backgroundColor: COLORS.dark,
+          borderTopColor: COLORS.grey,
+          borderTopWidth: 0,
+          backgroundColor: COLORS.background,
         },
         headerRight: () => {
-          return (
-            <Link href="login">
-              <Text style={globalStyles.text}>Login</Text>
-            </Link>
+          return user ? null : (
+            <View style={{ paddingRight: 20 }}>
+              <Link href="login">
+                <Text style={globalStyles.text}>Login</Text>
+              </Link>
+            </View>
           );
         },
-        tabBarActiveTintColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.grey,
+        tabBarActiveTintColor: COLORS.text,
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(books)"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => {
-            return <MaterialIcons name="animation" size={24} color={color} />;
-          },
-        }}
-      />
-      <Tabs.Screen
-        name="page2"
-        options={{
-          title: "Page 2",
+          headerShown: false,
+          title: "Library",
+          tabBarLabel: "Library",
           tabBarIcon: ({ color }) => {
             return (
               <MaterialCommunityIcons
-                name="animation-outline"
+                name="bookshelf"
                 size={24}
                 color={color}
               />
@@ -48,6 +52,36 @@ export default function MainTabs() {
           },
         }}
       />
+      {user ? (
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            tabBarIcon: ({ color }) => {
+              return (
+                <MaterialIcons name="person-outline" size={24} color={color} />
+              );
+            },
+          }}
+        />
+      ) : (
+        <Tabs.Screen
+          name="profile"
+          options={{
+            href: user ? "profile" : null,
+            title: "Profile",
+            tabBarIcon: ({ color }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="animation-outline"
+                  size={24}
+                  color={color}
+                />
+              );
+            },
+          }}
+        />
+      )}
     </Tabs>
   );
 }
