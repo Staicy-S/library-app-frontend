@@ -1,8 +1,8 @@
 import { Text, View, FlatList, Button } from "react-native";
-import { globalStyles } from "../../styles/global";
+import { globalStyles } from "../../../styles/global";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { BookListItem } from "../../components/BookListItem";
+import { BookListItem } from "../../../components/BookListItem";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 

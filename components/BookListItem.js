@@ -8,7 +8,7 @@ import { useState } from "react";
 export function BookListItem({ book }) {
   const [isPressed, setIsPressed] = useState(false);
   return (
-    <Link asChild href={`/books/${book.id}`}>
+    <Link asChild href={`/${book.id}`}>
       <Pressable
         onPressIn={() => {
           setIsPressed(true);
@@ -57,7 +57,7 @@ export function BookListItem({ book }) {
                 },
               ]}
             >
-              1972
+              {book.publishing_year}
             </Text>
           </View>
           <View style={[styles.availableCopiesContainer]}>

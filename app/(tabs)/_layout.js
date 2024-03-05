@@ -36,8 +36,9 @@ export default function MainTabs() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(books)"
         options={{
+          headerShown: false,
           title: "Library",
           tabBarLabel: "Library",
           tabBarIcon: ({ color }) => {
