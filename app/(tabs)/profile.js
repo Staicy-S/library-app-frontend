@@ -13,7 +13,6 @@ export default function Profile() {
 
   return (
     <View style={[globalStyles.container, globalStyles.spacing]}>
-      <Text style={globalStyles.heading}>Profile</Text>
       <Text style={globalStyles.text}>Welcome {user?.name}</Text>
       <Pressable onPress={logout} style={globalStyles.submitPressable}>
         <Text style={[globalStyles.text, globalStyles.submitPressableText]}>

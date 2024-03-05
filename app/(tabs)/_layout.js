@@ -14,16 +14,17 @@ export default function MainTabs() {
     <Tabs
       screenOptions={{
         headerShadowVisible: false,
-        headerStyle: { backgroundColor: COLORS.backgroundDark },
+        headerStyle: { backgroundColor: COLORS.background },
         headerTitleStyle: [globalStyles.heading],
         headerTintColor: COLORS.text,
         tabBarStyle: {
           borderTopColor: COLORS.grey,
-          backgroundColor: COLORS.backgroundDark,
+          borderTopWidth: 0,
+          backgroundColor: COLORS.background,
         },
         headerRight: () => {
           return user ? null : (
-            <View style={{ paddingRight: 12 }}>
+            <View style={{ paddingRight: 20 }}>
               <Link href="login">
                 <Text style={globalStyles.text}>Login</Text>
               </Link>

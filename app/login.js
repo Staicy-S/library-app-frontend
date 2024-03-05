@@ -5,6 +5,7 @@ import { useState, useContext } from "react";
 import { useRouter } from "expo-router";
 import { UserContext } from "../context/UserContext";
 import { Redirect } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Login() {
   const router = useRouter();
@@ -25,8 +26,11 @@ export default function Login() {
       style={[
         globalStyles.container,
         {
+          backgroundColor: COLORS.background,
           justifyContent: "center",
           position: "relative",
+          gap: 12,
+          paddingHorizontal: 40,
         },
       ]}
     >
@@ -34,14 +38,14 @@ export default function Login() {
         <Pressable
           style={{
             position: "absolute",
-            top: 10,
-            right: 10,
+            top: 20,
+            right: 20,
           }}
           onPress={() => {
             router.back();
           }}
         >
-          <Text style={{ backgroundColor: COLORS.dark, fontSize: 26 }}>❌</Text>
+          <MaterialCommunityIcons name="close" size={32} color={COLORS.grey} />
         </Pressable>
       )}
       <Text style={globalStyles.heading}>Login</Text>

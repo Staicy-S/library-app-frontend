@@ -25,10 +25,11 @@ export default function Home() {
   }, []);
 
   return (
-    <View style={globalStyles.container}>
+    <View style={[globalStyles.container, { paddingVertical: 0 }]}>
       <View>
         <FlatList
-          contentContainerStyle={{ gap: 12 }}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ gap: 12, paddingVertical: 12 }}
           data={books}
           keyExtractor={(book) => book.id}
           renderItem={({ item }) => {
