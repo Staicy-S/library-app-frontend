@@ -24,7 +24,7 @@ export default function MainTabs() {
         },
         headerRight: () => {
           return user ? null : (
-            <View style={{ paddingRight: 20 }}>
+            <View style={{ paddingRight: 0 }}>
               <Link href="login">
                 <Text style={globalStyles.text}>Login</Text>
               </Link>
